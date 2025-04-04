@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Face Recognition Live</title>
+  <link rel="stylesheet" href="/css/styles.css" />
+  <script defer src="/js/face-api.min.js"></script>
+  <script defer src="/js/app.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    h1 {
+      margin-bottom: 30px;
+    }
+    input, button {
+      font-size: 16px;
+      padding: 8px;
+      width: 100%;
+    }
+    button {
+      cursor: pointer;
+      background-color: #007BFF;
+      color: white;
+      border: none;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    #result, #registerStatus {
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1>Face Recognition Live</h1>
+
+  <div style="display: flex; gap: 40px; flex-wrap: wrap;">
+    <!-- Sección Video + Canvas -->
+    <div style="position: relative; width: 640px;">
+      <video id="video" width="640" height="480" autoplay muted></video>
+      <canvas id="canvas" width="640" height="480" style="position: absolute; top: 0; left: 0;"></canvas>
+      <div id="result" style="margin-top: 10px;">🧠 Cargando modelos...</div>
+    </div>
+
+    <!-- Sección Registro -->
+    <div style="width: 300px;">
+      <h2>Registrar nuevo rostro</h2>
+      <form id="registerForm" enctype="multipart/form-data">
+        <input type="text" name="name" placeholder="Nombre" required /><br /><br />
+        <input type="file" name="file" accept="image/*" required /><br /><br />
+        <button type="submit">Registrar</button>
+      </form>
+      <p id="registerStatus" style="margin-top: 10px;"></p>
+    </div>
+  </div>
+</body>
+</html>
