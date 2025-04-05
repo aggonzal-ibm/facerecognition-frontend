@@ -1,59 +1,58 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <title>Face Recognition Live</title>
-  <link rel="stylesheet" href="/css/styles.css" />
+  <title>Reconocimiento Facial Completo</title>
   <script defer src="/js/face-api.min.js"></script>
   <script defer src="/js/app.js"></script>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      padding: 20px;
-    }
-    h1 {
-      margin-bottom: 30px;
-    }
-    input, button {
-      font-size: 16px;
-      padding: 8px;
-      width: 100%;
-    }
-    button {
-      cursor: pointer;
-      background-color: #007BFF;
-      color: white;
-      border: none;
-    }
-    button:hover {
-      background-color: #0056b3;
-    }
-    #result, #registerStatus {
-      font-weight: bold;
-    }
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    h2 { margin-top: 40px; }
+    #video-container { position: relative; display: inline-block; }
+    #canvas { position: absolute; top: 0; left: 0; }
+    video, canvas { width: 640px; height: 480px; }
+    .flex { display: flex; gap: 30px; flex-wrap: wrap; }
+    #preview img { max-width: 300px; border: 1px solid #ccc; }
+    .status { font-weight: bold; margin-top: 10px; }
   </style>
 </head>
 <body>
-  <h1>Face Recognition Live</h1>
+  <h1>🔐 Sistema de Reconocimiento Facial</h1>
 
-  <div style="display: flex; gap: 40px; flex-wrap: wrap;">
-    <!-- Sección Video + Canvas -->
-    <div style="position: relative; width: 640px;">
-      <video id="video" width="640" height="480" autoplay muted></video>
-      <canvas id="canvas" width="640" height="480" style="position: absolute; top: 0; left: 0;"></canvas>
-      <div id="result" style="margin-top: 10px;">🧠 Cargando modelos...</div>
+  <!-- 1. Cámara en vivo + Detección cada 3s -->
+  <div class="flex">
+    <div id="video-container">
+      <video id="video" autoplay muted playsinline></video>
+      <canvas id="canvas"></canvas>
     </div>
 
-    <!-- Sección Registro -->
-    <div style="width: 300px;">
-      <h2>Registrar nuevo rostro</h2>
-      <form id="registerForm" enctype="multipart/form-data">
-        <input type="text" name="name" placeholder="Nombre" required /><br /><br />
-        <input type="file" name="file" accept="image/*" required /><br /><br />
-        <button type="submit">Registrar</button>
-      </form>
-      <p id="registerStatus" style="margin-top: 10px;"></p>
+    <div id="preview">
+      <h3>📷 Vista previa</h3>
+      <img id="photoPreview" src="#" hidden />
+      <p id="imageInfo"></p>
     </div>
   </div>
+
+  <!-- 2. Registro desde cámara -->
+  <h2>📸 Registrar rostro desde cámara</h2>
+  <form id="registerForm">
+    <input type="text" id="nameInput" placeholder="Tu nombre" required />
+    <button type="submit">Registrar</button>
+  </form>
+  <p class="status" id="registerStatus"></p>
+
+  <!-- 3. Registro desde imagen -->
+  <h2>📤 Registrar desde archivo</h2>
+  <form id="registerFileForm">
+    <input type="text" id="nameInputFile" placeholder="Nombre para registro" required />
+    <input type="file" id="fileRegisterInput" accept="image/*" required />
+    <button type="submit">➕ Registrar imagen</button>
+  </form>
+  <p class="status" id="registerFileStatus"></p>
+
+  <!-- 4. Buscar imagen manual -->
+  <h2>🔍 Buscar persona desde archivo</h2>
+  <input type="file" id="uploadInput" accept="image/*" />
+  <p class="status" id="uploadResult"></p>
 </body>
 </html>

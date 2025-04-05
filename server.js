@@ -5,7 +5,7 @@ const path = require("path");
 
 const app = express();
 const PORT = 3000;
-const API_TARGET = "http://localhost:8000";
+const API_TARGET = "http://localhost:8010";
 
 app.use("/api", createProxyMiddleware({
   target: API_TARGET,
